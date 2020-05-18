@@ -19,3 +19,58 @@ def board
   puts "-----------"
   puts " #{$square[6]} | #{$square[7]} | #{$square[8]} "
 end
+
+$player = 1
+$square = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+$mark = 'X'
+$i = -1
+
+while $i == -1
+  board
+
+  puts "\n\nPlayer #{$player}, enter a number: "
+
+  $choice = gets.chomp.to_i
+
+  if $choice == 1 && $square[0] == '1'
+    $square[0] = $mark
+    $player += 1
+  elsif $choice == 2 && $square[1] == '2'
+    $square[1] = $mark
+    $player += 1
+  elsif $choice == 3 && $square[2] == '3'
+    $square[2] = $mark
+    $player += 1
+  elsif $choice == 4 && $square[3] == '4'
+    $square[3] = $mark
+    $player += 1
+  elsif $choice == 5 && $square[4] == '5'
+    $square[4] = $mark
+    $player += 1
+  elsif $choice == 6 && $square[5] == '6'
+    $square[5] = $mark
+    $player += 1
+  elsif $choice == 7 && $square[6] == '7'
+    $square[6] = $mark
+    $player += 1
+  elsif $choice == 8 && $square[7] == '8'
+    $square[7] = $mark
+    $player += 1
+  elsif $choice == 9 && $square[8] == '9'
+    $square[8] = $mark
+    $player += 1
+  else
+    puts "\n\nInvalid move. Press Enter to continue..."
+    gets.chomp
+  end
+
+  if $player % 2 == 0
+    $player = 2
+    $mark = 'O'
+  else
+    $player = 1
+    $mark = 'X'
+  end
+end
+
+board
