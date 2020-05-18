@@ -20,6 +20,32 @@ def board
   puts " #{$square[6]} | #{$square[7]} | #{$square[8]} "
 end
 
+def checkwin
+  if $square[0] == $square[1] && $square[1] == $square[2]
+    return 1
+  elsif $square[3] == $square[4] && $square[4] == $square[5]
+    return 1
+  elsif $square[6] == $square[7] && $square[7] == $square[8]
+    return 1
+  elsif $square[0] == $square[3] && $square[3] == $square[6]
+    return 1
+  elsif $square[1] == $square[4] && $square[4] == $square[7]
+    return 1
+  elsif $square[2] == $square[5] && $square[5] == $square[8]
+    return 1
+  elsif $square[0] == $square[4] && $square[4] == $square[8]
+    return 1
+  elsif $square[2] == $square[4] && $square[4] == $square[6]
+    return 1
+  elsif $square[0] != '1' && $square[1] != '2' && $square[2] != '3' &&
+        $square[3] != '4' && $square[4] != '5' && $square[5] != '6' &&
+        $square[6] != '7' && $square[7] != '8' && $square[8] != '9'
+   return 0
+  else
+   return  - 1
+  end
+end
+
 $player = 1
 $square = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 $mark = 'X'
@@ -71,6 +97,18 @@ while $i == -1
     $player = 1
     $mark = 'X'
   end
+
+  $i = checkwin
 end
 
 board
+
+if $i == 1
+  puts "\n\n* * * * * * * * * * * * * *"
+  puts "* * *  Player #{$player} win   * * *"
+  puts "* * * * * * * * * * * * * *"
+else
+  puts "\n\n* * * * * * * * * * * * *"
+  puts "* * *   Game draw   * * *"
+  puts "* * * * * * * * * * * * *"
+end
