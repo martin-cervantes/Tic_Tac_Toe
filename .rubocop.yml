@@ -26,6 +26,16 @@ Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Lint/RaiseException:
+  Enable: false
+Lint/StructNewOverride:
+  Enable: false
+Style/HashEachMethods:
+  Enable: false
+Style/HashTransformKeys:
+  Enable: false
+Style/HashTransformValues:
+  Enable: false
 
 Layout/HashAlignment:
   EnforcedColonStyle: key
