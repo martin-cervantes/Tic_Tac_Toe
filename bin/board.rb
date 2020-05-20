@@ -1,4 +1,7 @@
 class board
+  def initialize
+    @square = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+  end
   
   def print_board 
    system "clear"
