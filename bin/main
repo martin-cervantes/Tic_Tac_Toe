@@ -25,6 +25,7 @@ $plyaer2 = Player.new('Player 2', 'O')
 $current_player = $player2
 
 $valid_choice = true
+$num_choice = 1
 
 $i = -1
 
@@ -42,7 +43,28 @@ while $i == -1
     gets
   end
 
-  $i = $board.checkwin
+  if $board.check_horizontal1
+    $i = 1
+  elsif $board.check_horizontal2
+    $i = 1
+  elsif $board.check_horizontal3
+    $i = 1
+  elsif $board.check_vertical1
+    $i = 1
+  elsif $board.check_vertical2
+    $i = 1
+  elsif $board.check_vertical3
+    $i = 1
+  elsif $board.check_diagonal1
+    $i = 1
+  elsif $board.check_diagonal2
+    $i = 1
+  elsif $board.check_draw($num_choice)
+    $i = 0
+  else
+    $i = -1
+    $num_choice += 1
+  end
 end
 
 $board.print_board
