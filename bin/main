@@ -6,34 +6,50 @@
 # Tic Tac Toe Game
 #
 require 'colorize'
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+
+def switch_player
+  if $current_player == $player1
+    $current_player = $plyaer2
+  else
+    $current_player = $player1
+  end
+end
+
+$board = Board.new
+
+$player1 = Player.new('Player 1', 'X')
+$plyaer2 = Player.new('Player 2', 'O')
+
+$current_player = $player2
+
+$valid_choice = true
 
 $i = -1
 
 while $i == -1
-  board
+  $board.print_board
 
-  $player += 1
+  switch_player if $valid_choice == true
 
-  if $player % 2 == 0
-    $player = 2
-    $mark = 'O'
-    puts "\n\nPlayer #{$player}, enter a number: ".blue
-  else
-    $player = 1
-    $mark = 'X'
-    puts "\n\nPlayer #{$player}, enter a number: ".red
+  puts "\n\n#{$current_player.name}, enter a number: ".blue
+
+  $valid_choice = $board.get_choice(gets.chomp.to_i, $current_player.mark)
+
+  if $valid_choice == false
+    puts "Invalid move. Press Enter to continue..."
+    gets
   end
 
-  $choice = gets.chomp.to_i
-
-  $i = checkwin
+  $i = $board.checkwin
 end
 
-board
+$board.print_board
 
 if $i == 1
   puts "\n\n* * * * * * * * * * * * * *"
-  puts "* * *  Player #{$player} win   * * *"
+  puts "* * *  #{$current_player.name} win   * * *"
   puts "* * * * * * * * * * * * * *"
 else
   puts "\n\n* * * * * * * * * * * * *"
