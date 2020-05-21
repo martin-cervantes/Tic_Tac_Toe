@@ -1,10 +1,3 @@
-#!/usr/bin/env ruby
-
-# frozen_string_literal: true
-
-#
-# Tic Tac Toe Game
-#
 class Board
   def initialize
     @square = %w[0 1 2 3 4 5 6 7 8 9]
@@ -12,16 +5,16 @@ class Board
 
   def print_board
     system 'clear'
-    puts '+---------------------------+'
-    puts '|   T I C   T A C   T O E   |'
-    puts "+---------------------------+\n\n"
-    puts "Player 1 (X)  -  Player 2 (O)\n\n"
-    puts "Enter a number that corresponds to a point on the board\n\n"
-    puts " #{@square[1]} | #{@square[2]} | #{@square[3]} "
-    puts '-----------'
-    puts " #{@square[4]} | #{@square[5]} | #{@square[6]} "
-    puts '-----------'
-    puts " #{@square[7]} | #{@square[8]} | #{@square[9]} "
+    return """    +---------------------------+
+    |   T I C   T A C   T O E   | 
+    +---------------------------+\n\n
+    Player 1 (X)  -  Player 2 (O)\n\n
+    Enter a number that corresponds to a point on the board\n\n
+    #{@square[1]} | #{@square[2]} | #{@square[3]}
+    -----------
+    #{@square[4]} | #{@square[5]} | #{@square[6]}
+    -----------
+    #{@square[7]} | #{@square[8]} | #{@square[9]}"""
   end
 
   def check_horizontal1
