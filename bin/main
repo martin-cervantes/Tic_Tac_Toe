@@ -2,9 +2,6 @@
 
 # frozen_string_literal: true
 
-#
-# Tic Tac Toe Game
-#
 require 'colorize'
 require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
