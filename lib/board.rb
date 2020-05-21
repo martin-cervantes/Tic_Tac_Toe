@@ -2,7 +2,7 @@
 
 class Board
   def initialize
-    @square = %w[0 1 2 3 4 5 6 7 8 9]
+    @square = [%w[0], %w[0 11 12 13], %w[0 21 22 23], %w[0 31 32 33]]
   end
 
   def print_board
@@ -11,64 +11,47 @@ class Board
     "|   T I C   T A C   T O E   |\n"\
     "+---------------------------+\n\n"\
     "Player 1 (X)  -  Player 2 (O)\n\n"\
-    "Enter a number that corresponds to a point on the board\n\n"\
-    "#{@square[1]} | #{@square[2]} | #{@square[3]}\n"\
-    "-----------\n"\
-    "#{@square[4]} | #{@square[5]} | #{@square[6]}\n"\
-    "-----------\n"\
-    "#{@square[7]} | #{@square[8]} | #{@square[9]}\n"
+    "Enter the numbers that corresponds to co-ordinate point on the board\n\n"\
+    "   [1] [2] [3]\n"\
+    "[1] #{@square[1][1]} | #{@square[1][2]} | #{@square[1][3]}\n"\
+    "   -----------\n"\
+    "[2] #{@square[2][1]} | #{@square[2][2]} | #{@square[2][3]}\n"\
+    "   -----------\n"\
+    "[3] #{@square[3][1]} | #{@square[3][2]} | #{@square[3][3]}\n"
   end
 
-  def check_horizontal1
-    if @square[1] == @square[2] && @square[2] == @square[3]
-      true
-    else
-      false
+  def check_horizontal
+    res = false
+    n = 1
+    while n <= 3
+      if @square[n][1] == @square[n][2] && @square[n][2] == @square[n][3]
+        res = true
+        break
+      end
+
+      n += 1
     end
+
+    res
   end
 
-  def check_horizontal2
-    if @square[4] == @square[5] && @square[5] == @square[6]
-      true
-    else
-      false
-    end
-  end
+  def check_vertical
+    res = false
+    n = 1
+    while n <= 3
+      if @square[1][n] == @square[2][n] && @square[2][n] == @square[3][n]
+        res = true
+        break
+      end
 
-  def check_horizontal3
-    if @square[7] == @square[8] && @square[8] == @square[9]
-      true
-    else
-      false
+      n += 1
     end
-  end
 
-  def check_vertical1
-    if @square[1] == @square[4] && @square[4] == @square[7]
-      true
-    else
-      false
-    end
-  end
-
-  def check_vertical2
-    if @square[2] == @square[5] && @square[5] == @square[8]
-      true
-    else
-      false
-    end
-  end
-
-  def check_vertical3
-    if @square[3] == @square[6] && @square[6] == @square[9]
-      true
-    else
-      false
-    end
+    res
   end
 
   def check_diagonal1
-    if @square[1] == @square[5] && @square[5] == @square[9]
+    if @square[1][1] == @square[2][2] && @square[2][2] == @square[3][3]
       true
     else
       false
@@ -76,7 +59,7 @@ class Board
   end
 
   def check_diagonal2
-    if @square[3] == @square[5] && @square[5] == @square[7]
+    if @square[1][3] == @square[2][2] && @square[2][2] == @square[3][1]
       true
     else
       false
@@ -87,9 +70,17 @@ class Board
     num_choice == 9
   end
 
-  def get_choice(choice, mark)
-    if @square[choice] != 'X' && @square[choice] != 'O' && choice >= 1 && choice <= 9
-      @square[choice] = mark
+  def valid_choice(choice)
+    if choice[0].to_i >= 1 && choice[0].to_i <= 3 && choice[1].to_i >= 1 && choice[1].to_i <= 3
+      true
+    else
+      false
+    end
+  end
+
+  def set_choice(choice, mark)
+    if @square[choice[0].to_i][choice[1].to_i] != 'X' && @square[choice[0].to_i][choice[1].to_i] != 'O'
+      @square[choice[0].to_i][choice[1].to_i] = mark
       true
     else
       false

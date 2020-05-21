@@ -33,7 +33,17 @@ while $i == -1
 
   puts "\n\n#{$current_player.name}, enter a number: ".blue
 
-  $valid_choice = $board.get_choice(gets.chomp.to_i, $current_player.mark)
+  choice = gets.chomp
+
+  if $board.valid_choice(choice)
+    if $board.set_choice(choice, $current_player.mark)
+      $valid_choice = true
+    else
+      $valid_choice = false
+    end
+  else
+    $valid_choice = false
+  end
 
   if $valid_choice == false
     puts "Invalid move. Press Enter to continue..."
@@ -42,17 +52,9 @@ while $i == -1
     $num_choice += 1
   end
 
-  if $board.check_horizontal1
+  if $board.check_horizontal
     $i = 1
-  elsif $board.check_horizontal2
-    $i = 1
-  elsif $board.check_horizontal3
-    $i = 1
-  elsif $board.check_vertical1
-    $i = 1
-  elsif $board.check_vertical2
-    $i = 1
-  elsif $board.check_vertical3
+  elsif $board.check_vertical
     $i = 1
   elsif $board.check_diagonal1
     $i = 1
