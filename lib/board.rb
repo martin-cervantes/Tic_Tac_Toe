@@ -7,16 +7,16 @@ class Board
 
   def print_board
     system 'clear'
-    return """    +---------------------------+
-    |   T I C   T A C   T O E   | 
-    +---------------------------+\n\n
-    Player 1 (X)  -  Player 2 (O)\n\n
-    Enter a number that corresponds to a point on the board\n\n
-    #{@square[1]} | #{@square[2]} | #{@square[3]}
-    -----------
-    #{@square[4]} | #{@square[5]} | #{@square[6]}
-    -----------
-    #{@square[7]} | #{@square[8]} | #{@square[9]}"""
+    "+---------------------------+\n"\
+    "|   T I C   T A C   T O E   |\n"\
+    "+---------------------------+\n\n"\
+    "Player 1 (X)  -  Player 2 (O)\n\n"\
+    "Enter a number that corresponds to a point on the board\n\n"\
+    "#{@square[1]} | #{@square[2]} | #{@square[3]}\n"\
+    "-----------\n"\
+    "#{@square[4]} | #{@square[5]} | #{@square[6]}\n"\
+    "-----------\n"\
+    "#{@square[7]} | #{@square[8]} | #{@square[9]}\n"
   end
 
   def check_horizontal1
