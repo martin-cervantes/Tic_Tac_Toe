@@ -1,10 +1,5 @@
-#!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-#
-# Tic Tac Toe Player
-#
 class Player
   attr_reader :name, :mark
 
