@@ -2,110 +2,76 @@
 
 # frozen_string_literal: true
 
-#
-# Tic Tac Toe Game
-#
+require 'colorize'
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
 
-def board
-  system "clear"
-  puts "+---------------------------+"
-  puts "|   T I C   T A C   T O E   |"
-  puts "+---------------------------+\n\n"
-  puts "Player 1 (X)  -  Player 2 (O)\n\n"
-  puts "Enter a number that corresponds to a point on the board\n\n"
-  puts " #{$square[0]} | #{$square[1]} | #{$square[2]} "
-  puts "-----------"
-  puts " #{$square[3]} | #{$square[4]} | #{$square[5]} "
-  puts "-----------"
-  puts " #{$square[6]} | #{$square[7]} | #{$square[8]} "
-end
-
-def checkwin
-  if $square[0] == $square[1] && $square[1] == $square[2]
-    return 1
-  elsif $square[3] == $square[4] && $square[4] == $square[5]
-    return 1
-  elsif $square[6] == $square[7] && $square[7] == $square[8]
-    return 1
-  elsif $square[0] == $square[3] && $square[3] == $square[6]
-    return 1
-  elsif $square[1] == $square[4] && $square[4] == $square[7]
-    return 1
-  elsif $square[2] == $square[5] && $square[5] == $square[8]
-    return 1
-  elsif $square[0] == $square[4] && $square[4] == $square[8]
-    return 1
-  elsif $square[2] == $square[4] && $square[4] == $square[6]
-    return 1
-  elsif $square[0] != '1' && $square[1] != '2' && $square[2] != '3' &&
-        $square[3] != '4' && $square[4] != '5' && $square[5] != '6' &&
-        $square[6] != '7' && $square[7] != '8' && $square[8] != '9'
-   return 0
+def switch_player
+  if $current_player == $player1
+    $current_player = $plyaer2
   else
-   return  - 1
+    $current_player = $player1
   end
 end
 
-$player = 1
-$square = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-$mark = 'X'
+$board = Board.new
+
+$player1 = Player.new('Player 1', 'X')
+$plyaer2 = Player.new('Player 2', 'O')
+
+$current_player = $player2
+
+$valid_choice = true
+$num_choice = 0
+
 $i = -1
 
 while $i == -1
-  board
+  puts $board.print_board
 
-  puts "\n\nPlayer #{$player}, enter a number: "
+  switch_player if $valid_choice == true
 
-  $choice = gets.chomp.to_i
+  puts "\n\n#{$current_player.name}, enter a number: ".blue
 
-  if $choice == 1 && $square[0] == '1'
-    $square[0] = $mark
-    $player += 1
-  elsif $choice == 2 && $square[1] == '2'
-    $square[1] = $mark
-    $player += 1
-  elsif $choice == 3 && $square[2] == '3'
-    $square[2] = $mark
-    $player += 1
-  elsif $choice == 4 && $square[3] == '4'
-    $square[3] = $mark
-    $player += 1
-  elsif $choice == 5 && $square[4] == '5'
-    $square[4] = $mark
-    $player += 1
-  elsif $choice == 6 && $square[5] == '6'
-    $square[5] = $mark
-    $player += 1
-  elsif $choice == 7 && $square[6] == '7'
-    $square[6] = $mark
-    $player += 1
-  elsif $choice == 8 && $square[7] == '8'
-    $square[7] = $mark
-    $player += 1
-  elsif $choice == 9 && $square[8] == '9'
-    $square[8] = $mark
-    $player += 1
+  choice = gets.chomp
+
+  if $board.valid_choice(choice)
+    if $board.set_choice(choice, $current_player.mark)
+      $valid_choice = true
+    else
+      $valid_choice = false
+    end
   else
-    puts "\n\nInvalid move. Press Enter to continue..."
-    gets.chomp
+    $valid_choice = false
   end
 
-  if $player % 2 == 0
-    $player = 2
-    $mark = 'O'
+  if $valid_choice == false
+    puts "Invalid move. Press Enter to continue..."
+    gets
   else
-    $player = 1
-    $mark = 'X'
+    $num_choice += 1
   end
 
-  $i = checkwin
+  if $board.check_horizontal
+    $i = 1
+  elsif $board.check_vertical
+    $i = 1
+  elsif $board.check_diagonal1
+    $i = 1
+  elsif $board.check_diagonal2
+    $i = 1
+  elsif $board.check_draw($num_choice)
+    $i = 0
+  else
+    $i = -1
+  end
 end
 
-board
+puts $board.print_board
 
 if $i == 1
   puts "\n\n* * * * * * * * * * * * * *"
-  puts "* * *  Player #{$player} win   * * *"
+  puts "* * *  #{$current_player.name} win   * * *"
   puts "* * * * * * * * * * * * * *"
 else
   puts "\n\n* * * * * * * * * * * * *"
