@@ -31,7 +31,11 @@ while $i == -1
 
   switch_player if $valid_choice == true
 
-  puts "\n\n#{$current_player.name}, enter a number: ".blue
+  if $current_player.name == 'Player 1'
+    puts "\n\n#{$current_player.name}, enter a number: ".blue
+  else
+    puts "\n\n#{$current_player.name}, enter a number: ".red
+  end
 
   choice = gets.chomp
 
